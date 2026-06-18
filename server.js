@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import adminRoutes        from './routes/admin.js';
 import notificationsRoutes from './routes/notifications.js';
 import usersRoutes         from './routes/users.js';
+import posterRoutes        from './routes/poster.js';
 
 dotenv.config();
 
@@ -27,6 +28,7 @@ app.get('/health', (_req, res) => res.json({ status: 'ok', service: 'memoera-fes
 app.use('/api/admin',         adminRoutes);
 app.use('/api/notifications', notificationsRoutes);
 app.use('/api/users',         usersRoutes);
+app.use('/api/poster',        posterRoutes);
 
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 Memoera Festival Backend running on port ${PORT}`);
