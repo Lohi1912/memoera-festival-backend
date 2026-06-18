@@ -28,6 +28,6 @@ app.use('/api/admin',         adminRoutes);
 app.use('/api/notifications', notificationsRoutes);
 app.use('/api/users',         usersRoutes);
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 Memoera Festival Backend running on port ${PORT}`);
 });
