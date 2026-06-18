@@ -18,6 +18,7 @@ app.use(cors({
     process.env.FRONTEND_URL || 'http://localhost:5173',
     'https://memoera.in',
     'https://www.memoera.in',
+    'https://suchithraprints.in',
     'http://localhost:5173',
   ],
   credentials: true,
