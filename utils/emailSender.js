@@ -82,7 +82,7 @@ export async function sendFestivalEmail({ toEmail, userName, festivalName, image
 </html>`;
 
   await resend.emails.send({
-    from: `Memoera Greetings <greetings@${process.env.EMAIL_FROM_DOMAIN || 'suchithraprints.in'}>`,
+    from: process.env.EMAIL_FROM || 'Memoera Greetings <onboarding@resend.dev>',
     to: toEmail,
     subject: `Happy ${festivalName} from Memoera! 🎉`,
     html,
