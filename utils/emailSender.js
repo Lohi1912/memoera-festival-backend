@@ -54,7 +54,7 @@ export async function sendFestivalEmail({ toEmail, userName, festivalName, image
                 line-height:1.75;max-width:420px;">
                 ${overlayText}
               </p>
-              <a href="https://suchithraprints.in"
+              <a href="https://memoera.in"
                 style="display:inline-block;background:linear-gradient(135deg,#00C9A7,#00E5CC);
                   color:#040D0B;text-decoration:none;font-weight:700;font-size:14px;
                   padding:13px 30px;border-radius:26px;">
@@ -69,7 +69,7 @@ export async function sendFestivalEmail({ toEmail, userName, festivalName, image
               style="padding:16px 32px 22px;border-top:1px solid rgba(255,255,255,0.07);">
               <p style="margin:0;color:rgba(255,255,255,0.28);font-size:11px;line-height:1.6;">
                 You're receiving this as a Memoera subscriber.<br/>
-                © 2025 Memoera · suchithraprints.in
+                © 2025 Memoera · memoera.in
               </p>
             </td>
           </tr>

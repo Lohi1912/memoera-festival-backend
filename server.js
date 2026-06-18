@@ -15,7 +15,8 @@ const PORT = process.env.PORT || 3001;
 app.use(cors({
   origin: [
     process.env.FRONTEND_URL || 'http://localhost:5173',
-    'https://suchithraprints.in',
+    'https://memoera.in',
+    'https://www.memoera.in',
     'http://localhost:5173',
   ],
   credentials: true,
