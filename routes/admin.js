@@ -13,7 +13,17 @@ const redisConnection = {
   tls:      process.env.REDIS_TLS === 'true' ? {} : undefined,
 };
 
-const greetingQueue = new Queue('festival-greetings', { connection: redisConnection });
+// Lazily create the queue only when an admin endpoint is actually called.
+// This keeps the API server (posters, notifications, users, content-safety)
+// from ever opening a Redis connection — so it never touches the Upstash
+// quota just to serve a poster request.
+let greetingQueue = null;
+function getQueue() {
+  if (!greetingQueue) {
+    greetingQueue = new Queue('festival-greetings', { connection: redisConnection });
+  }
+  return greetingQueue;
+}
 
 // Admin authentication middleware — checks x-admin-key header
 function requireAdmin(req, res, next) {
@@ -59,7 +69,7 @@ router.post('/festival-blast', requireAdmin, async (req, res) => {
     },
   }));
 
-  await greetingQueue.addBulk(jobs);
+  await getQueue().addBulk(jobs);
 
   console.log(`📬 Festival blast queued: ${users.length} users | "${festival_name}"`);
 
@@ -72,11 +82,12 @@ router.post('/festival-blast', requireAdmin, async (req, res) => {
 
 // GET /api/admin/blast-status — live queue progress
 router.get('/blast-status', requireAdmin, async (req, res) => {
+  const q = getQueue();
   const [waiting, active, completed, failed] = await Promise.all([
-    greetingQueue.getWaitingCount(),
-    greetingQueue.getActiveCount(),
-    greetingQueue.getCompletedCount(),
-    greetingQueue.getFailedCount(),
+    q.getWaitingCount(),
+    q.getActiveCount(),
+    q.getCompletedCount(),
+    q.getFailedCount(),
   ]);
   res.json({ waiting, active, completed, failed });
 });
